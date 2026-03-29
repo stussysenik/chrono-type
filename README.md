@@ -15,6 +15,8 @@ Captures keystroke timing, computes running statistics in Zig-compiled WASM,
 and renders live-updating visualizations via RxJS-coordinated canvas operations.
 Streams to an Elixir/Phoenix backend for real-time multi-user analytics.
 
+![Gallery Index](docs/images/gallery-index.png)
+
 </div>
 
 ---
@@ -24,6 +26,10 @@ Streams to an Elixir/Phoenix backend for real-time multi-user analytics.
 ChronoType is a browser-based instrument that measures how you type. Every keystroke's timing feeds into a 692-byte Zig WASM module running Welford's online algorithm, producing real-time mean, variance, and histogram data with zero garbage collection pauses. Eight different canvas visualizations render this data at 60fps, from EKG waveforms to Matrix-style memory views. An Elixir/Phoenix backend handles multi-user streaming, leaderboards, and analytics via OTP GenServers and Phoenix Channels.
 
 Built as a developer portfolio piece demonstrating sub-frame temporal consistency between input events, statistical computation, and pixel output.
+
+| | |
+|---|---|
+| ![Home](docs/images/home.png) | ![Session](docs/images/session.png) |
 
 ---
 
@@ -43,6 +49,30 @@ Eight visualizations, one engine. Each renders the same WASM data through a diff
 | 8 | **The Stats** | All three | Odometer digits, sparklines, and radar typing fingerprint |
 
 Navigate via `/gallery` or arrow keys between pages. Each visualization includes a "Try it live" toggle.
+
+### Mechanical
+
+| The Pipeline | The Heatmap |
+|---|---|
+| ![Pipeline](docs/images/viz-pipeline.png) | ![Heatmap](docs/images/viz-heatmap.png) |
+
+### Organic
+
+| The Histogram | The Waveform | The Scatter |
+|---|---|---|
+| ![Histogram](docs/images/viz-histogram.png) | ![Waveform](docs/images/viz-waveform.png) | ![Scatter](docs/images/viz-scatter.png) |
+
+### Data Matrix
+
+| The Memory | The Streams |
+|---|---|
+| ![Memory](docs/images/viz-memory.png) | ![Streams](docs/images/viz-streams.png) |
+
+### All Three Fused
+
+| The Stats |
+|---|
+| ![Stats](docs/images/viz-stats.png) |
 
 ---
 
@@ -205,6 +235,10 @@ railway up
 ```
 
 Environment variables: `DATABASE_URL`, `SECRET_KEY_BASE`, `PHX_HOST`, `PORT`
+
+### Phoenix LiveDashboard
+
+![LiveDashboard](docs/images/livedashboard.png)
 
 ---
 
