@@ -6259,6 +6259,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/phoenix@npm:^1":
+  version: 1.6.7
+  resolution: "@types/phoenix@npm:1.6.7"
+  checksum: 10c0/0ff8b6dc7d3d8d4a94d5b6bb4f7792db0d40ddef0dd722651929925663bd6aade2a0d41453dbcf4a31bb65471a2c982b17ba3e43eb7abc31b50c20cc489364a4
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.15
   resolution: "@types/prop-types@npm:15.7.15"
@@ -15108,6 +15115,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"phoenix@npm:^1.8.5":
+  version: 1.8.5
+  resolution: "phoenix@npm:1.8.5"
+  checksum: 10c0/11e7a4c75a41524e25aa32001be709ad50d2a8d02650f0c67f30e4e69bd5d85211054137a51b7d4dcf9cfe65d1e65cf7bbefa22c4207506caf1afd36bf7cd551
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.1, picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
@@ -18591,9 +18605,11 @@ __metadata:
     "@redwoodjs/router": "npm:8.9.0"
     "@redwoodjs/vite": "npm:8.9.0"
     "@redwoodjs/web": "npm:8.9.0"
+    "@types/phoenix": "npm:^1"
     "@types/react": "npm:^18.2.55"
     "@types/react-dom": "npm:^18.2.19"
     jsdom: "npm:^29.0.1"
+    phoenix: "npm:^1.8.5"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     rxjs: "npm:^7.8.2"

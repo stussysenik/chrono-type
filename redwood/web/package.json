@@ -14,12 +14,14 @@
     "@redwoodjs/forms": "8.9.0",
     "@redwoodjs/router": "8.9.0",
     "@redwoodjs/web": "8.9.0",
+    "phoenix": "^1.8.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
     "@redwoodjs/vite": "8.9.0",
+    "@types/phoenix": "^1",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "jsdom": "^29.0.1",
