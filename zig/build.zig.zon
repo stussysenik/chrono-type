@@ -1,0 +1,12 @@
+.{
+    .name = .chrono_stats,
+    .version = "0.1.0",
+    .fingerprint = 0x6b4ab02a34b82813,
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

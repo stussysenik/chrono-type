@@ -1,0 +1,34 @@
+# Zig
+zig/zig-out/
+zig/zig-cache/
+zig/.zig-cache/
+
+# Node
+node_modules/
+.yarn/cache
+.yarn/install-state.gz
+
+# RedwoodJS
+redwood/.redwood/
+redwood/web/dist/
+redwood/api/dist/
+
+# Elixir
+phoenix/_build/
+phoenix/deps/
+phoenix/.elixir_ls/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Environment
+.env
+.env.local
+
+# Superpowers
+.superpowers/
+
+# OS
+.DS_Store
