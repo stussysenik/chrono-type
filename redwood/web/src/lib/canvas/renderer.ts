@@ -134,12 +134,14 @@ export class HistogramRenderer {
       ctx.fillText(label, x, chartBottom + 4)
     }
 
-    // ── Y-axis label ────────────────────────────────────────────────────
-    ctx.textAlign = 'right'
-    ctx.textBaseline = 'middle'
-    ctx.fillStyle = COLORS.label
-    ctx.fillText(String(maxCount), chartLeft - 8, chartTop)
-    ctx.fillText('0', chartLeft - 8, chartBottom)
+    // ── Y-axis label (hide when no data to keep initial state clean) ──
+    if (stats.count > 0) {
+      ctx.textAlign = 'right'
+      ctx.textBaseline = 'middle'
+      ctx.fillStyle = COLORS.label
+      ctx.fillText(String(maxCount), chartLeft - 8, chartTop)
+      ctx.fillText('0', chartLeft - 8, chartBottom)
+    }
 
     // ── Stats row ───────────────────────────────────────────────────────
     const statsY = h - 20

@@ -11,7 +11,7 @@ const HomePage = () => {
   return (
     <>
       <Metadata title="ChronoType" description="Real-time keystroke dynamics visualizer" />
-      <div
+      <main
         style={{
           minHeight: '100vh',
           background: '#000',
@@ -44,7 +44,7 @@ const HomePage = () => {
         >
           Start Typing
         </Link>
-      </div>
+      </main>
     </>
   )
 }

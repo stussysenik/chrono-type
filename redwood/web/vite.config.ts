@@ -12,6 +12,10 @@ dns.setDefaultResultOrder('verbatim')
 const viteConfig: UserConfig = {
   plugins: [redwood()],
   server: {
+    hmr: {
+      // Prevent HMR WebSocket from conflicting with the Phoenix proxy
+      port: 8911,
+    },
     proxy: {
       // Forward REST API calls to Phoenix
       '/api': {

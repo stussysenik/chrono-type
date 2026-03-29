@@ -28,18 +28,7 @@ defmodule ChronoTypeWeb.Router do
     resources "/sessions", SessionController, only: [:index, :show, :create]
   end
 
-  # LiveDashboard — available in dev via /dev/dashboard
-  if Application.compile_env(:chrono_type, :dev_routes) do
-    import Phoenix.LiveDashboard.Router
-
-    scope "/dev" do
-      pipe_through [:fetch_session, :protect_from_forgery]
-
-      live_dashboard "/dashboard", metrics: ChronoTypeWeb.Telemetry
-    end
-  end
-
-  # Also expose LiveDashboard at /dashboard behind session auth
+  # LiveDashboard — server observability with custom typing metrics
   import Phoenix.LiveDashboard.Router
 
   scope "/" do

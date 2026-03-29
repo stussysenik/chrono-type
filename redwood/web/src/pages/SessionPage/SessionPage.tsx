@@ -12,7 +12,7 @@ const SessionPage = () => {
   return (
     <>
       <Metadata title="Session" description="Typing session" />
-      <div
+      <main
         style={{
           minHeight: '100vh',
           background: '#000',
@@ -23,7 +23,7 @@ const SessionPage = () => {
         }}
       >
         <TypingArea />
-      </div>
+      </main>
     </>
   )
 }
