@@ -17,6 +17,7 @@ redwood/api/dist/
 phoenix/_build/
 phoenix/deps/
 phoenix/.elixir_ls/
+erl_crash.dump
 
 # IDE
 .idea/

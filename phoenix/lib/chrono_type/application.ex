@@ -12,9 +12,13 @@ defmodule ChronoType.Application do
       ChronoType.Repo,
       {DNSCluster, query: Application.get_env(:chrono_type, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: ChronoType.PubSub},
-      # Start a worker by calling: ChronoType.Worker.start_link(arg)
-      # {ChronoType.Worker, arg},
-      # Start to serve requests, typically the last entry
+      # Presence must start before channels that use it
+      ChronoTypeWeb.Presence,
+      # DynamicSupervisor for on-demand session processes
+      {DynamicSupervisor, name: ChronoType.SessionSupervisor, strategy: :one_for_one},
+      # Real-time analytics pipeline backed by ETS
+      ChronoType.Analytics.Pipeline,
+      # Start to serve requests — typically the last entry
       ChronoTypeWeb.Endpoint
     ]
 
