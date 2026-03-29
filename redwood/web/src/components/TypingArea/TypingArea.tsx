@@ -20,10 +20,13 @@ import { Subject, interval, animationFrameScheduler } from 'rxjs'
 
 import { HistogramRenderer } from 'src/lib/canvas'
 import type { DrawStats } from 'src/lib/canvas'
+import { usePhoenix } from 'src/lib/phoenix/context'
+import { joinChannel } from 'src/lib/phoenix/socket'
 import {
   createKeystrokeStream,
   createStatsIngestionStream,
   createVisualizationStream,
+  createNetworkSyncStream,
 } from 'src/lib/streams'
 import { loadChronoStats } from 'src/lib/wasm'
 import type { ChronoStatsApi } from 'src/lib/wasm'
@@ -41,6 +44,7 @@ const TypingArea = () => {
   const rendererRef = useRef<HistogramRenderer | null>(null)
   const [_stats, setStats] = useState<Stats>({ mean: 0, stddev: 0, wpm: 0, count: 0 })
   const [wasmLoaded, setWasmLoaded] = useState(false)
+  const { connected } = usePhoenix()
 
   useEffect(() => {
     let cleanup: (() => void) | undefined
@@ -95,10 +99,41 @@ const TypingArea = () => {
         }
       )
 
+      // Stream 3: network sync (optional — fire-and-forget to Phoenix Channel)
+      // Buffers keystrokes every 100ms and pushes batches to the typing channel.
+      // Gracefully no-ops if not connected to Phoenix (local WASM still works).
+      let networkSub: { unsubscribe: () => void } | undefined
+      if (connected) {
+        try {
+          const typingChannel = joinChannel('typing:lobby')
+          const flushTrigger$ = new Subject<void>()
+          const flushInterval = setInterval(() => flushTrigger$.next(), 100)
+
+          networkSub = createNetworkSyncStream(keystroke$, flushTrigger$).subscribe(
+            (batch) => {
+              typingChannel.push('keystroke_batch', { keystrokes: batch })
+            }
+          )
+
+          // Extend cleanup to tear down the network stream
+          const originalCleanup = () => {
+            clearInterval(flushInterval)
+            networkSub?.unsubscribe()
+            flushTrigger$.complete()
+          }
+          // Store for cleanup below
+          networkSub = { unsubscribe: originalCleanup }
+        } catch {
+          // Socket not connected — silently skip network sync
+          console.debug('Phoenix socket not connected, skipping network sync')
+        }
+      }
+
       cleanup = () => {
         frameSub.unsubscribe()
         ingestionSub.unsubscribe()
         vizSub.unsubscribe()
+        networkSub?.unsubscribe()
         frameTrigger$.complete()
         renderer.destroy()
         statsApi.reset()
@@ -107,7 +142,7 @@ const TypingArea = () => {
 
     init()
     return () => cleanup?.()
-  }, [])
+  }, [connected])
 
   // Auto-focus textarea once WASM is ready
   useEffect(() => {
