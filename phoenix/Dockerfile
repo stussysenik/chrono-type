@@ -32,4 +32,4 @@ WORKDIR /app
 COPY --from=elixir-build /build/_build/prod/rel/chrono_type ./
 ENV PHX_SERVER=true
 EXPOSE 4000
-CMD ["bin/chrono_type", "start"]
+CMD ["sh", "-c", "bin/chrono_type eval 'ChronoType.Release.migrate()' && bin/chrono_type start"]

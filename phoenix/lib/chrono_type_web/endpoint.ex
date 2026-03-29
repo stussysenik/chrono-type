@@ -16,7 +16,7 @@ defmodule ChronoTypeWeb.Endpoint do
     longpoll: [connect_info: [session: @session_options]]
 
   socket "/socket", ChronoTypeWeb.UserSocket,
-    websocket: [check_origin: false],
+    websocket: [check_origin: ["http://localhost:8910", "https://chrono-type.up.railway.app"]],
     longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.

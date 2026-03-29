@@ -42,7 +42,8 @@ const TypingArea = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const rendererRef = useRef<HistogramRenderer | null>(null)
-  const [_stats, setStats] = useState<Stats>({ mean: 0, stddev: 0, wpm: 0, count: 0 })
+  const statsRef = useRef<Stats>({ mean: 0, stddev: 0, wpm: 0, count: 0 })
+  const lastStatsUpdate = useRef(0)
   const [wasmLoaded, setWasmLoaded] = useState(false)
   const { connected } = usePhoenix()
 
@@ -88,14 +89,13 @@ const TypingArea = () => {
             count: snapshot.count,
           }
           renderer.draw(drawStats)
-          // Only update React state for stats readout below canvas;
-          // canvas rendering itself never triggers a React re-render.
-          setStats({
+          // Store stats in ref (no React re-render). Canvas renders directly.
+          statsRef.current = {
             mean: snapshot.mean,
             stddev: snapshot.stddev,
             wpm: snapshot.wpm,
             count: snapshot.count,
-          })
+          }
         }
       )
 
@@ -111,7 +111,7 @@ const TypingArea = () => {
 
           networkSub = createNetworkSyncStream(keystroke$, flushTrigger$).subscribe(
             (batch) => {
-              typingChannel.push('keystroke_batch', { keystrokes: batch })
+              typingChannel.push('keystroke_batch', { events: batch })
             }
           )
 
