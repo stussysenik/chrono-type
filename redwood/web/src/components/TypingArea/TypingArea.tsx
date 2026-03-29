@@ -171,7 +171,8 @@ const TypingArea = () => {
       {/* Typing input */}
       <textarea
         ref={textareaRef}
-        role="textbox"
+        id="typing-input"
+        name="typing-input"
         aria-label="Type here to start recording keystrokes"
         placeholder={wasmLoaded ? 'Start typing\u2026' : 'Loading WASM engine\u2026'}
         disabled={!wasmLoaded}
