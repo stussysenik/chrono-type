@@ -1,20 +1,40 @@
-// import { Link, routes } from '@redwoodjs/router'
+/**
+ * Gallery Waveform Page — full-screen "The Waveform" visualization.
+ *
+ * Renders the EKG heartbeat of typing rhythm using the WaveformRenderer
+ * at 1200x800 on a full-viewport canvas.
+ */
+
 import { Metadata } from '@redwoodjs/web'
 
+import GalleryShell from 'src/components/GalleryShell/GalleryShell'
+import { SLIDES } from 'src/lib/gallery/slides'
+import { useGalleryViz } from 'src/lib/gallery/useGalleryViz'
+
+const SLIDE_INDEX = 2
+
 const GalleryWaveformPage = () => {
+  const slide = SLIDES[SLIDE_INDEX]
+  const { canvasRef, isLive, toggleLive } = useGalleryViz(slide.createRenderer)
+
   return (
     <>
-      <Metadata title="GalleryWaveform" description="GalleryWaveform page" />
-
-      <h1>GalleryWaveformPage</h1>
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/GalleryWaveformPage/GalleryWaveformPage.tsx</code>
-      </p>
-      {/*
-          My default route is named `galleryWaveform`, link to me with:
-          `<Link to={routes.galleryWaveform()}>GalleryWaveform</Link>`
-      */}
+      <Metadata title={slide.title} description={slide.description} />
+      <GalleryShell
+        title={slide.title}
+        description={slide.description}
+        currentIndex={SLIDE_INDEX}
+        slides={SLIDES}
+        isLive={isLive}
+        onLiveToggle={toggleLive}
+      >
+        <canvas
+          ref={canvasRef}
+          width={1200}
+          height={800}
+          style={{ width: '100%', height: '100%', display: 'block' }}
+        />
+      </GalleryShell>
     </>
   )
 }
