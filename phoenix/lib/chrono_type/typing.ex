@@ -43,6 +43,14 @@ defmodule ChronoType.Typing do
     {:ok, count}
   end
 
+  def leaderboard(limit \\ 10) do
+    Session
+    |> where([s], not is_nil(s.wpm))
+    |> order_by(desc: :wpm)
+    |> limit(^limit)
+    |> Repo.all()
+  end
+
   def list_passages do
     Repo.all(Passage)
   end

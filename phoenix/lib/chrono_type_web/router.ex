@@ -5,8 +5,27 @@ defmodule ChronoTypeWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # Public API routes — no authentication required
   scope "/api", ChronoTypeWeb do
     pipe_through :api
+
+    post "/auth/register", AuthController, :register
+    post "/auth/login", AuthController, :login
+
+    get "/stats/global", StatsController, :global
+    get "/stats/leaderboard", StatsController, :leaderboard
+
+    get "/health", HealthController, :index
+  end
+
+  # Authenticated API routes — require Bearer token
+  scope "/api", ChronoTypeWeb do
+    pipe_through [:api, ChronoTypeWeb.Plugs.Auth]
+
+    delete "/auth/logout", AuthController, :logout
+    get "/auth/token", AuthController, :socket_token
+
+    resources "/sessions", SessionController, only: [:index, :show, :create]
   end
 
   # Enable LiveDashboard in development
