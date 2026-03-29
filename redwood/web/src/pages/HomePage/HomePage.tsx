@@ -44,6 +44,25 @@ const HomePage = () => {
         >
           Start Typing
         </Link>
+        <Link
+          to={routes.gallery()}
+          style={{
+            color: '#555',
+            fontSize: 14,
+            textDecoration: 'none',
+            transition: 'color 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = '#888'
+            e.currentTarget.style.textDecoration = 'underline'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = '#555'
+            e.currentTarget.style.textDecoration = 'none'
+          }}
+        >
+          View Gallery
+        </Link>
       </main>
     </>
   )
