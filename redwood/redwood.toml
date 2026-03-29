@@ -6,12 +6,12 @@
 # https://redwoodjs.com/docs/app-configuration-redwood-toml
 
 [web]
-  title = "Redwood App"
+  title = "ChronoType"
   port = 8910
-  apiUrl = "/.redwood/functions" # You can customize graphql and dbauth urls individually too: see https://redwoodjs.com/docs/app-configuration-redwood-toml#api-paths
+  apiUrl = "/.redwood/functions" # Vestigial — ChronoType uses Phoenix REST at /api, not RW serverless
   includeEnvironmentVariables = [
-    # Add any ENV vars that should be available to the web side to this array
-    # See https://redwoodjs.com/docs/environment-variables#web
+    "PHOENIX_SOCKET_URL",
+    # PHOENIX_SOCKET_URL: ws://localhost:4000/socket (dev) or wss://... (prod)
   ]
 [api]
   port = 8911
