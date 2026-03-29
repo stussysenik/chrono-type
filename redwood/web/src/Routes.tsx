@@ -12,6 +12,15 @@ import { Router, Route } from '@redwoodjs/router'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/gallery/stats" page={GalleryStatsPage} name="galleryStats" />
+      <Route path="/gallery/streams" page={GalleryStreamsPage} name="galleryStreams" />
+      <Route path="/gallery/heatmap" page={GalleryHeatmapPage} name="galleryHeatmap" />
+      <Route path="/gallery/scatter" page={GalleryScatterPage} name="galleryScatter" />
+      <Route path="/gallery/memory" page={GalleryMemoryPage} name="galleryMemory" />
+      <Route path="/gallery/waveform" page={GalleryWaveformPage} name="galleryWaveform" />
+      <Route path="/gallery/histogram" page={GalleryHistogramPage} name="galleryHistogram" />
+      <Route path="/gallery/pipeline" page={GalleryPipelinePage} name="galleryPipeline" />
+      <Route path="/gallery" page={GalleryPage} name="gallery" />
       <Route path="/history" page={HistoryPage} name="history" />
       <Route path="/leaderboard" page={LeaderboardPage} name="leaderboard" />
       <Route path="/session" page={SessionPage} name="session" />
