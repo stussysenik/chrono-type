@@ -2,6 +2,9 @@
 
 # ChronoType
 
+![Demo](demo.gif)
+
+
 **Real-time keystroke dynamics visualizer**
 
 [![Zig](https://img.shields.io/badge/Zig-0.15.2-f7a41d?style=flat-square&logo=zig&logoColor=white)](https://ziglang.org)
